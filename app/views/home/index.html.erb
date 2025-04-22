@@ -1,0 +1,23 @@
+<div class="hero">
+  <h1>Find Your Perfect Wedding Photographer</h1>
+  <p>Browse through our curated list of professional wedding photographers</p>
+  <%= link_to "Browse Photographers", photographers_path, class: "btn btn-primary" %>
+  <%= link_to "Join as Photographer", new_registration_path(role: 'photographer'), class: "btn btn-secondary" %>
+</div>
+
+<div class="featured-photographers">
+  <h2>Featured Photographers</h2>
+  <div class="photographer-grid">
+    <% @featured_photographers.each do |photographer| %>
+      <div class="photographer-card">
+        <% if photographer.portfolio_images.attached? %>
+          <%= image_tag photographer.portfolio_images.first, class: "photographer-image" %>
+        <% end %>
+        <h3><%= photographer.business_name %></h3>
+        <p><%= truncate(photographer.description, length: 100) %></p>
+        <p>Location: <%= photographer.location %></p>
+        <%= link_to "View Profile", photographer_path(photographer), class: "btn btn-small" %>
+      </div>
+    <% end %>
+  </div>
+</div>

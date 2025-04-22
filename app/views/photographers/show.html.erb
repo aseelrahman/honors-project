@@ -1,0 +1,54 @@
+<div class="photographer-profile">
+  <div class="profile-header">
+    <h1><%= @photographer.business_name %></h1>
+    <p><%= @photographer.location %></p>
+    <p><%= pluralize(@photographer.experience_years, 'year') %> of experience</p>
+  </div>
+  
+  <div class="profile-portfolio">
+    <h2>Portfolio</h2>
+    <div class="portfolio-grid">
+      <% @photographer.portfolio_images.each do |image| %>
+        <%= image_tag image, class: "portfolio-image" %>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="profile-packages">
+    <h2>Wedding Packages</h2>
+    <div class="packages-grid">
+      <% @packages.each do |package| %>
+        <div class="package-card">
+          <h3><%= package.name %></h3>
+          <p class="price">$<%= package.price %></p>
+          <p><%= package.duration_hours %> hours of coverage</p>
+          <p><%= package.description %></p>
+          <ul>
+            <% package.included_services.each do |service| %>
+              <li><%= service %></li>
+            <% end %>
+          </ul>
+          <%= link_to "Book Now", new_client_booking_path(package_id: package.id), class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="profile-reviews">
+    <h2>Reviews</h2>
+    <% if @reviews.any? %>
+      <% @reviews.each do |review| %>
+        <div class="review-item">
+          <div class="review-header">
+            <span class="rating">★ <%= review.rating %></span>
+            <span class="reviewer"><%= review.client.first_name %></span>
+            <span class="date"><%= review.created_at.strftime("%B %d, %Y") %></span>
+          </div>
+          <p><%= review.content %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No reviews yet.</p>
+    <% end %>
+  </div>
+</div>

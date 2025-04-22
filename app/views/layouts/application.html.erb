@@ -1,28 +1,54 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Honors Project" %></title>
+    <title>Wedding Photography Platform</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
+  
   <body>
-    <%= yield %>
+    <nav class="navbar">
+      <div class="container">
+        <%= link_to "Wedding Photography", root_path, class: "navbar-brand" %>
+        
+        <ul class="navbar-menu">
+          <li><%= link_to "Find Photographers", photographers_path %></li>
+          <% if logged_in? %>
+            <% if client? %>
+              <li><%= link_to "My Bookings", client_bookings_path %></li>
+              <li><%= link_to "Dashboard", client_dashboard_path %></li>
+            <% elsif photographer? %>
+              <li><%= link_to "My Profile", edit_photographer_profile_path %></li>
+              <li><%= link_to "My Packages", photographer_packages_path %></li>
+              <li><%= link_to "Dashboard", photographer_dashboard_path %></li>
+            <% end %>
+            <li><%= button_to "Logout", logout_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Login", login_path %></li>
+            <li><%= link_to "Sign Up", signup_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    
+    <% flash.each do |type, message| %>
+      <div class="alert alert-<%= type %>">
+        <%= message %>
+      </div>
+    <% end %>
+    
+    <main class="container">
+      <%= yield %>
+    </main>
+    
+    <footer>
+      <div class="container">
+        <p>&copy; <%= Time.current.year %> Wedding Photography Platform</p>
+      </div>
+    </footer>
   </body>
 </html>

@@ -1,0 +1,76 @@
+# app/assets/stylesheets/application.tailwind.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded font-semibold text-white no-underline;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-500 hover:bg-blue-600;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-500 hover:bg-gray-600;
+  }
+  
+  .form-group {
+    @apply mb-4;
+  }
+  
+  .form-group label {
+    @apply block text-gray-700 font-medium mb-2;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    @apply w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500;
+  }
+  
+  .alert {
+    @apply p-4 mb-4 rounded;
+  }
+  
+  .alert-notice {
+    @apply bg-green-100 text-green-700;
+  }
+  
+  .alert-alert {
+    @apply bg-red-100 text-red-700;
+  }
+  
+  .badge {
+    @apply inline-block px-2 py-1 text-xs font-semibold rounded;
+  }
+  
+  .badge-success {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .badge-danger {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .navbar {
+    @apply bg-white shadow;
+  }
+  
+  .container {
+    @apply max-w-6xl mx-auto px-4;
+  }
+  
+  .photographer-card {
+    @apply bg-white rounded-lg shadow p-4;
+  }
+  
+  .photographer-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+}

@@ -1,0 +1,21 @@
+<h1>Find Wedding Photographers</h1>
+
+<div class="filters">
+  <!-- Add search/filter form here -->
+</div>
+
+<div class="photographers-list">
+  <% @photographers.each do |photographer| %>
+    <div class="photographer-item">
+      <div class="photographer-info">
+        <h3><%= link_to photographer.business_name, photographer_path(photographer) %></h3>
+        <p><%= photographer.location %></p>
+        <p><%= pluralize(photographer.experience_years, 'year') %> of experience</p>
+        <p>Starting from $<%= photographer.packages.minimum(:price) %></p>
+      </div>
+      <div class="photographer-actions">
+        <%= link_to "View Profile", photographer_path(photographer), class: "btn" %>
+      </div>
+    </div>
+  <% end %>
+</div>
