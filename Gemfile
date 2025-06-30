@@ -5,7 +5,7 @@ ruby "3.3.4"
 
 gem "rails", "~> 8.0.2"
 gem "pg", "~> 1.1"
-gem "sqlite3", "~> 2.1"  # Specifies SQLite 2.1 or newer
+gem "sqlite3", "~> 2.7"  # Specifies SQLite 2.1 or newer
 gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
